@@ -1,4 +1,3 @@
 fastapi
-uvicorn[standard]
-git+https://github.com/ModularCommandProtocol/mcp.git#egg=mcp
-
+uvicorn
+mcp @ git+https://${GH_TOKEN}@github.com/ModularCommandProtocol/mcp.git#egg=mcp
