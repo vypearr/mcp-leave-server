@@ -6,7 +6,6 @@ on:
       - main
 
 permissions:
-  id-token: write
   contents: read
 
 jobs:
@@ -40,9 +39,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Web App using publish profile
         uses: azure/webapps-deploy@v2
         with:
           app-name: leave-assistant
+          slot-name: production
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
           package: .
