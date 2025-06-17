@@ -26,10 +26,13 @@ jobs:
           python -m venv venv
           source venv/bin/activate
 
-      - name: Install dependencies (excluding MCP)
+      - name: Set GH_TOKEN environment variable
+        run: echo "GH_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Install dependencies (including MCP)
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt || true  # ignore failure if MCP is missing
+          pip install -r requirements.txt
 
   deploy:
     runs-on: ubuntu-latest
