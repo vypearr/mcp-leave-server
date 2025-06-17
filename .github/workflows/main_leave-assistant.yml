@@ -26,8 +26,9 @@ jobs:
           python -m venv venv
           source venv/bin/activate
 
-      - name: Set GH_TOKEN environment variable
-        run: echo "GH_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
+      - name: Configure Git to use GitHub token for private repos
+        run: |
+          git config --global url."https://${{ secrets.GH_TOKEN }}@github.com/".insteadOf https://github.com/
 
       - name: Install dependencies (including MCP)
         run: |
