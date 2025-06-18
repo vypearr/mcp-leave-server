@@ -1,3 +1,4 @@
 fastapi
 uvicorn
-git+https://github.com/modelcontextprotocol/python-sdk.git#egg=mcp&subdirectory=src
+git+https://github.com/<your-username>/python-sdk.git#egg=mcp&subdirectory=src
+
