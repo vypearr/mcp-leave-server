@@ -54,3 +54,4 @@ def leave_summary(emp_id: str) -> str:
         f"- History: {', '.join(history) if history else 'No leaves taken'}"
     )
 
+app = mcp
