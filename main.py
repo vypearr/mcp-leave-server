@@ -4,7 +4,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 from typing import Any
 from mcp.server.fastmcp import FastMCP
 
-# Start MCP server
+# Start MCP server.
 mcp = FastMCP("HRLeaveAssistant")
 
 # In-memory mock database
