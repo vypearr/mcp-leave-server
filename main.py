@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
+
 from typing import Any
 from mcp.server.fastmcp import FastMCP
 
