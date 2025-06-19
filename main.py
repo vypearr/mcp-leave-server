@@ -2,7 +2,7 @@ from typing import Any
 from mcp.server.fastmcp import FastMCP
 
 # Start MCP server
-app = FastMCP("HRLeaveAssistant")
+app = FastMCP("HRLeaveAssistant").app
 
 # In-memory mock database with 20 leave days to start.
 employee_leaves = {
