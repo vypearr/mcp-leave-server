@@ -2,7 +2,7 @@ from typing import Any
 from mcp.server.fastmcp import FastMCP
 
 # Start MCP server
-mcp = FastMCP("HRLeaveAssistant").app
+mcp = FastMCP("HRLeaveAssistant")
 
 # In-memory mock database
 employee_leaves = {
