@@ -54,6 +54,3 @@ def leave_summary(emp_id: str) -> str:
         f"- History: {', '.join(history) if history else 'No leaves taken'}"
     )
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(mcp, host="0.0.0.0", port=8000)
