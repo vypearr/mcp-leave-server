@@ -2,7 +2,7 @@ from typing import Any
 from mcp.server.fastmcp import FastMCP
 
 # Start MCP server
-app = FastMCP("HRLeaveAssistant").app
+mcp = FastMCP("HRLeaveAssistant").app
 
 # In-memory mock database
 employee_leaves = {
@@ -10,7 +10,7 @@ employee_leaves = {
     "E002": {"balance": 20, "history": []}
 }
 
-@app.tool()
+@mcp.tool()
 def request_leave(emp_id: str, leave_date: str) -> str:
     """Request leave on a specific date (YYYY-MM-DD)"""
     if emp_id not in employee_leaves:
@@ -26,14 +26,14 @@ def request_leave(emp_id: str, leave_date: str) -> str:
         f"Remaining balance: {employee_leaves[emp_id]['balance']}"
     )
 
-@app.tool()
+@mcp.tool()
 def check_balance(emp_id: str) -> str:
     """Check available leave balance"""
     if emp_id not in employee_leaves:
         return "Employee not found."
     return f"{emp_id} has {employee_leaves[emp_id]['balance']} day(s) of leave remaining."
 
-@app.tool()
+@mcp.tool()
 def leave_history(emp_id: str) -> str:
     """View leave dates taken"""
     if emp_id not in employee_leaves:
@@ -41,7 +41,7 @@ def leave_history(emp_id: str) -> str:
     history = employee_leaves[emp_id]["history"]
     return f"{emp_id} has taken leave on: {', '.join(history) if history else 'No leaves taken.'}"
 
-@app.resource("leave://{emp_id}")
+@mcp.resource("leave://{emp_id}")
 def leave_summary(emp_id: str) -> str:
     """Leave summary resource"""
     if emp_id not in employee_leaves:
@@ -56,4 +56,4 @@ def leave_summary(emp_id: str) -> str:
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(mcp, host="0.0.0.0", port=8000)
