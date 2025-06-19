@@ -4,28 +4,21 @@ from mcp.server.fastmcp import FastMCP
 # Start MCP server
 app = FastMCP("HRLeaveAssistant").app
 
-# In-memory mock database with 20 leave days to start.
+# In-memory mock database
 employee_leaves = {
     "E001": {"balance": 18, "history": ["2024-12-25", "2025-01-01"]},
     "E002": {"balance": 20, "history": []}
 }
-
-# ========================
-# Tools for Employees
-# ========================
 
 @app.tool()
 def request_leave(emp_id: str, leave_date: str) -> str:
     """Request leave on a specific date (YYYY-MM-DD)"""
     if emp_id not in employee_leaves:
         return "Employee not found."
-
     if leave_date in employee_leaves[emp_id]["history"]:
         return "Leave already taken on this date."
-
     if employee_leaves[emp_id]["balance"] <= 0:
         return "Insufficient leave balance."
-
     employee_leaves[emp_id]["history"].append(leave_date)
     employee_leaves[emp_id]["balance"] -= 1
     return (
@@ -48,10 +41,6 @@ def leave_history(emp_id: str) -> str:
     history = employee_leaves[emp_id]["history"]
     return f"{emp_id} has taken leave on: {', '.join(history) if history else 'No leaves taken.'}"
 
-# ========================
-# Resource Summary
-# ========================
-
 @app.resource("leave://{emp_id}")
 def leave_summary(emp_id: str) -> str:
     """Leave summary resource"""
@@ -64,3 +53,7 @@ def leave_summary(emp_id: str) -> str:
         f"- Balance: {balance} day(s)\n"
         f"- History: {', '.join(history) if history else 'No leaves taken'}"
     )
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
