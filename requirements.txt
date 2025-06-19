@@ -1,3 +1,2 @@
 fastapi
 uvicorn
-git+https://github.com/vypearr/python-sdk.git@main
