@@ -1,6 +1,3 @@
 fastapi
 uvicorn
-git+https://github.com/vypearr/python-sdk.git
-
-
-
+mcp @ git+https://github.com/vypearr/python-sdk.git@main#egg=mcp&subdirectory=src/mcp
